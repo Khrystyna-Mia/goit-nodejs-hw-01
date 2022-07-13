@@ -19,6 +19,11 @@ async function invokeAction({ action, id, name, email, phone}) {
             const contacts = await contactsOperations.listContacts();
             console.table(contacts);
             break;
+
+        case 'get':
+            const contact = await contactsOperations.getContactById(id);
+            console.table(contact);
+            break;    
     }
 }
 

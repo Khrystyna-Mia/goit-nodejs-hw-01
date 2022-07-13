@@ -9,6 +9,18 @@ async function listContacts() {
     return JSON.parse(data);
 }
 
+async function getContactById(contactId) {
+    const contacts = await listContacts();
+    const contactById = contacts.find(({ id }) => id === contactId);
+
+    if(!contactById) {
+        return null;
+    }
+
+    return contactById;
+}
+
 module.exports = {
     listContacts,
+    getContactById,
 };
