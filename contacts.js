@@ -20,7 +20,22 @@ async function getContactById(contactId) {
     return contactById;
 }
 
+async function updateContacts(contacts) {
+    await fs.writeFile(contactsPath, JSON.stringify(contacts, null, 2));
+}
+
+async function addContact(name, email, phone) {
+    const contacts = await listContacts();
+    const newContact = { id: nanoid(), name, email, phone };
+
+    contacts.push(newContact);
+    await updateContacts(contacts);
+
+    return newContact;
+}
+
 module.exports = {
     listContacts,
     getContactById,
+    addContact,
 };
